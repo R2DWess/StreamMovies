@@ -90,8 +90,104 @@ body{
 
 
 .streaming_crud_content{
+    display: flex;
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    flex-direction: column;
+    gap: 10px;
     color: white;
 }
+
+.top_content{
+    height: 15%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border: 1px solid red;
+}
+
+.top_content button{
+    width: 12%;
+    height: 70%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgba(43, 42, 42, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid #525252;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: rgb(153, 153, 153);
+}
+
+.bottom_content{
+    border: 1px solid rgb(168, 168, 168, 0.3);
+    border-radius: 10px;    
+    height: 85%;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+.search_category{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+
+.search_category input{
+    width: 100%;
+    height: 50%;
+    background-color: rgba(43, 42, 42, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid #525252;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: rgb(153, 153, 153);
+    padding: 5px;
+    outline: none;
+}
+.category_buttons{
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+}
+
+.category_buttons button{
+    height: 30%;
+    text-wrap: nowrap;
+}
+
+.card_filme{
+    display: flex;
+    height: 35%;
+    width: 18%;
+    border: 1px solid rgb(168, 168, 168, 0.3);
+    border-radius: 10px;
+}
+
+.card_filme img{
+    width: 100%;
+    width: 40%;
+}
+
+.card_info{
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card_text{
+    display: flex;
+    flex-direction: column;
+}
+
+.button-card{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+

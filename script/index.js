@@ -22,6 +22,9 @@ form_login.addEventListener('submit', (e) => {
     login(authenticated, login_content, streaming_crud_content, loading_content);
 });
 
+login(authenticated, login_content, streaming_crud_content, loading_content);
+
+
 
 
 

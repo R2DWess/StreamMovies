@@ -10,7 +10,7 @@ export const checkAuth = (login_content, authenticatedStatus, streaming_content,
         setTimeout(() => {
             loading_content.style.display = 'none';
             streaming_content.style.display = 'flex';
-        }, 1000);
+        }, 0);
         return;
     }
     login_content.style.display = 'flex';
