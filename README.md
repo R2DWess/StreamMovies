@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.jpg" alt="Universidade Católica de Brasília">
+  <img src="assets/logo_ucb.jpg" alt="Universidade Católica de Brasília">
 </p>
 
 ## PROJETO DE PROGRAMAÇÃO WEB - Universidade Católica de Brasília:
