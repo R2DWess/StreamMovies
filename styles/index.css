@@ -104,7 +104,6 @@ body{
     display: flex;
     gap: 10px;
     align-items: center;
-    border: 1px solid red;
 }
 
 .top_content button{
@@ -187,6 +186,11 @@ body{
 .button-card{
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+}
+
+.button-card svg{
+    cursor: pointer;
 }
 
 
