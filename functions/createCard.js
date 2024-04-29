@@ -1,4 +1,6 @@
-export function createCard(titulo, ano, categoria, poster) {
+import { renderAtoresInAddForm, renderGenerosInAddForm, renderRoteiristasInAddForm } from "./renderDomFunctions.js";
+
+export function createFilmeCard(titulo, ano, categoria, poster) {
     const categorias = categoria.map(cat => `<span>${cat}</span>`).join('');
     const card = document.createElement('div');
     card.classList.add('card_filme');
@@ -22,6 +24,60 @@ export function createCard(titulo, ano, categoria, poster) {
                 </div>
             </div>
     `;
+
+    return card;
+}
+
+export function createGeneroCard(genero, generosInAddForm, genero_selected_content){
+    const card = document.createElement('div');
+    card.classList.add('genero_selected_content');
+    card.innerHTML = `
+    <div class="genero_selected">
+        <span>${genero}</span>
+        <span class="remove_genero">X</span>
+    </div>
+    `;
+
+    card.querySelector('.remove_genero').addEventListener('click', () => {
+        generosInAddForm.splice(generosInAddForm.indexOf(genero), 1);
+        renderGenerosInAddForm(generosInAddForm, genero_selected_content)
+    });
+
+    return card;
+}
+
+export function createRoteiristaCard(roteirista, roteiristasInAddForm, roteirista_selected_content){
+    const card = document.createElement('div');
+    card.classList.add('roteirista_selected_content');
+    card.innerHTML = `
+    <div class="roteirista_selected">
+        <span>${roteirista}</span>
+        <span class="remove_roteirista">X</span>
+    </div>
+    `;
+
+    card.querySelector('.remove_roteirista').addEventListener('click', () => {
+        roteiristasInAddForm.splice(roteiristasInAddForm.indexOf(roteirista), 1);
+        renderRoteiristasInAddForm(roteiristasInAddForm, roteirista_selected_content)
+    });
+
+    return card;
+}
+
+export function createAtorCard(ator, atoresInAddForm, ator_selected_content){
+    const card = document.createElement('div');
+    card.classList.add('ator_selected_content');
+    card.innerHTML = `
+    <div class="ator_selected">
+        <span>${ator}</span>
+        <span class="remove_ator">X</span>
+    </div>
+    `;
+
+    card.querySelector('.remove_ator').addEventListener('click', () => {
+        atoresInAddForm.splice(atoresInAddForm.indexOf(ator), 1);
+        renderAtoresInAddForm(atoresInAddForm, ator_selected_content)
+    });
 
     return card;
 }
