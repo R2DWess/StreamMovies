@@ -28,15 +28,28 @@ const duracaoMinutos_add = document.querySelector('#duracaoMinutos_add');
 const diretor_add = document.querySelector('#diretor_add');
 const urlCapa_add = document.querySelector('#urlCapa_add');
 
+const titulo_edit = document.querySelector('#titulo_edit');
+const ano_edit = document.querySelector('#ano_edit');
+const duracaoMinutos_edit = document.querySelector('#duracaoMinutos_edit');
+const diretor_edit = document.querySelector('#diretor_edit');
+const urlCapa_edit = document.querySelector('#urlCapa_edit');
+
+
+const modalEdit = document.getElementById('exampleModalEdit');
+
 let filmes = [];
 let generosInAddForm = [];
 let roteiristasInAddForm = [];
 let atoresInAddForm = [];
 
+let generosInEditForm = [];
+let roteiristasInEditForm = [];
+let atoresInEditForm = [];
+
 getMovies().then((data) => {
     filmes = data;
     console.log(filmes);
-    renderMovies(list_content, filmes);
+    renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, generosInEditForm, roteiristasInEditForm, atoresInEditForm, genero_selected_content, roteiristas_selected_content, atores_selected_content);
 })  
 
 checkAuth(login_content, authenticated, streaming_crud_content, loading_content);

@@ -1,9 +1,9 @@
 import { createAtorCard, createFilmeCard, createGeneroCard, createRoteiristaCard } from "./createCard.js";
 
-export function renderMovies(list_content, filmes){
+export function renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, generosInEditForm, roteiristasInEditForm, atoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content){
     list_content.innerHTML = '';
     filmes.forEach((filme) => {
-        const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content)
+        const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, generosInEditForm, roteiristasInEditForm, atoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content);
         list_content.appendChild(card);
     });
 }

@@ -1,7 +1,7 @@
 import { getFilmeByTitulo } from "./getFilmeByTitulo.js";
 import { renderAtoresInAddForm, renderGenerosInAddForm, renderMovies, renderRoteiristasInAddForm } from "./renderDomFunctions.js";
 
-export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_content) {
+export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, generosInEditForm, roteiristasInEditForm, atoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content) {
     const categorias = categoria.map(cat => `<span>${cat}</span>`).join('');
     const card = document.createElement('div');
     card.classList.add('card_filme');
@@ -31,9 +31,35 @@ export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_con
         const filme = getFilmeByTitulo(titulo, filmes);
         if (filme) {
             filmes.splice(filmes.indexOf(filme), 1);
-            renderMovies(list_content, filmes);
+            renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, generosInEditForm, diretor_edit, roteiristasInEditForm, atoresInEditForm, urlCapa_edit, genero_selected_content, roteirista_selected_content, ator_selected_content);
         } else {
-            alert('Erro ao editar filme')
+            alert('Erro ao excluir filme')
+        }
+    });
+
+    const editButton = card.querySelector('.bi-pencil');
+    editButton.addEventListener('click', function() {
+        const filme = getFilmeByTitulo(titulo, filmes);
+
+        if (filme) {
+            const modal = new bootstrap.Modal(modal_edit);
+
+            titulo_edit.value = filme.titulo;
+            ano_edit.value = filme.ano;
+            duracaoMinutos_edit.value = filme.duracaoMinutos;
+            diretor_edit.value = filme.diretor;
+            urlCapa_edit.value = filme.poster;
+            generosInEditForm = filme.genero;
+            roteiristasInEditForm = filme.roteiristas;
+            atoresInEditForm = filme.atores;
+            console.log(genero_selected_content);
+            renderGenerosInAddForm(generosInEditForm, genero_selected_content);
+            renderRoteiristasInAddForm(roteiristasInEditForm, roteirista_selected_content);
+            renderAtoresInAddForm(atoresInEditForm, ator_selected_content);
+            
+            modal.show();
+        } else {
+            
         }
     });
 
