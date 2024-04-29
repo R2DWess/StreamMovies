@@ -3,7 +3,7 @@ import { createAtorCard, createFilmeCard, createGeneroCard, createRoteiristaCard
 export function renderMovies(list_content, filmes){
     list_content.innerHTML = '';
     filmes.forEach((filme) => {
-        const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster)
+        const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content)
         list_content.appendChild(card);
     });
 }

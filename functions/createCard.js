@@ -1,6 +1,7 @@
-import { renderAtoresInAddForm, renderGenerosInAddForm, renderRoteiristasInAddForm } from "./renderDomFunctions.js";
+import { getFilmeByTitulo } from "./getFilmeByTitulo.js";
+import { renderAtoresInAddForm, renderGenerosInAddForm, renderMovies, renderRoteiristasInAddForm } from "./renderDomFunctions.js";
 
-export function createFilmeCard(titulo, ano, categoria, poster) {
+export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_content) {
     const categorias = categoria.map(cat => `<span>${cat}</span>`).join('');
     const card = document.createElement('div');
     card.classList.add('card_filme');
@@ -24,6 +25,17 @@ export function createFilmeCard(titulo, ano, categoria, poster) {
                 </div>
             </div>
     `;
+
+    const deleteButton = card.querySelector('.bi-trash3');
+    deleteButton.addEventListener('click', function() {
+        const filme = getFilmeByTitulo(titulo, filmes);
+        if (filme) {
+            filmes.splice(filmes.indexOf(filme), 1);
+            renderMovies(list_content, filmes);
+        } else {
+            alert('Erro ao editar filme')
+        }
+    });
 
     return card;
 }

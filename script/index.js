@@ -107,6 +107,12 @@ addButtonFilme.addEventListener('click', (e) => {
     const filme = new Filme(titulo, ano, duracaoMinutos, generos, diretor, roteiristas, atores, urlCapa, undefined);
 
     filmes.push(filme);
+    generosInAddForm = [];
+    roteiristasInAddForm = [];
+    atoresInAddForm = [];
+    renderAtoresInAddForm(atoresInAddForm, atores_selected_content);
+    renderGenerosInAddForm(generosInAddForm, genero_selected_content);
+    renderRoteiristasInAddForm(roteiristasInAddForm, roteiristas_selected_content);
     renderMovies(list_content, filmes);
 });
 
