@@ -1,5 +1,5 @@
 import { checkAuth, login } from "../functions/auth.js";
-import { renderAtoresInAddForm, renderGenerosInAddForm, renderMovies, renderRoteiristasInAddForm } from "../functions/renderDomFunctions.js";
+import { renderAtoresInAddForm, renderAtoresInEditForm, renderGenerosInAddForm, renderGenerosInEditForm, renderMovies, renderRoteiristasInAddForm, renderRoteiristasInEditForm } from "../functions/renderDomFunctions.js";
 import { getMovies } from "../functions/service.js";
 import { Filme } from "../models/filme.js";
 
@@ -13,14 +13,28 @@ const list_content = document.querySelector('.bottom_content');
 const genero_selected_content = document.querySelector('.genero_selected_content');
 const roteiristas_selected_content = document.querySelector('.roteiristas_selected_content');
 const atores_selected_content = document.querySelector('.atores_selected_content');
+const genero_selected_content_edit = document.querySelector('.genero_selected_content_edit');
+const roteiristas_selected_content_edit = document.querySelector('.roteiristas_selected_content_edit');
+const atores_selected_content_edit = document.querySelector('.atores_selected_content_edit');
 
 const add_button = document.querySelector('.add_button');
-const add_genero_form_button = document.querySelector('#add_genero_form');
+const add_genero_form_button = document.querySelector('#add_genero');
 const categoria_add = document.querySelector('#categoria_add');
 const roteiristas_add = document.querySelector('#roteiristas_add');
+const categoria_edit = document.querySelector('#categoria_edit');
+const roteiristas_edit = document.querySelector('#roteiristas_edit');
+const atores_edit = document.querySelector('#atores_edit');
 const add_roteirista_form = document.querySelector('#add_roteirista_form');
 const add_atores_form = document.querySelector('#add_atores_form');
 const addButtonFilme = document.querySelector('#addButtonFilme');
+const editButtonFilme = document.querySelector('#editButtonFilme');
+const edit_genero_form_button = document.querySelector('#edit_genero_form');
+const edit_roteirista_form = document.querySelector('#edit_roteirista_form');
+const edit_atores_form = document.querySelector('#edit_atores_form');
+
+
+
+
 
 const titulo_add = document.querySelector('#titulo_add');
 const ano_add = document.querySelector('#ano_add');
@@ -49,7 +63,7 @@ let atoresInEditForm = [];
 getMovies().then((data) => {
     filmes = data;
     console.log(filmes);
-    renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, generosInEditForm, roteiristasInEditForm, atoresInEditForm, genero_selected_content, roteiristas_selected_content, atores_selected_content);
+    renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, generosInEditForm, roteiristasInEditForm, atoresInEditForm, genero_selected_content_edit, roteiristas_selected_content_edit, atores_selected_content_edit);
 })  
 
 checkAuth(login_content, authenticated, streaming_crud_content, loading_content);
@@ -105,6 +119,45 @@ add_atores_form.addEventListener('click', (e) => {
     renderAtoresInAddForm(atoresInAddForm, atores_selected_content);
 });
 
+edit_genero_form_button.addEventListener('click', (e) => {
+    e.preventDefault();
+    const genero = categoria_edit.value;
+
+    if(genero === '' || generosInEditForm.includes(genero)){
+        return;
+    }
+
+
+    generosInEditForm.push(genero);
+    renderGenerosInEditForm(generosInEditForm, genero_selected_content_edit);
+});
+
+edit_roteirista_form.addEventListener('click', (e) => {
+    e.preventDefault();
+    const roteirista = roteiristas_edit.value;
+
+    console.log(roteirista);
+    if(roteirista === '' || roteiristasInEditForm.includes(roteirista)){
+        return;
+    }
+
+    roteiristasInEditForm.push(roteirista);
+    renderRoteiristasInEditForm(roteiristasInEditForm, roteiristas_selected_content_edit);
+});
+
+edit_atores_form.addEventListener('click', (e) => {
+    e.preventDefault();
+    const ator = atores_edit.value;
+
+    console.log(ator);
+    if(ator === '' || atoresInEditForm.includes(ator)){
+        return;
+    }
+
+    atoresInEditForm.push(ator);
+    renderAtoresInEditForm(atoresInEditForm, atores_selected_content_edit);
+});
+
 addButtonFilme.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -127,6 +180,16 @@ addButtonFilme.addEventListener('click', (e) => {
     renderGenerosInAddForm(generosInAddForm, genero_selected_content);
     renderRoteiristasInAddForm(roteiristasInAddForm, roteiristas_selected_content);
     renderMovies(list_content, filmes);
+});
+
+editButtonFilme.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const titulo = titulo_edit.value;
+    const ano = ano_edit.value;
+    const duracaoEmMinutos = duracaoMinutos_edit.value;
+    const diretor = diretor_edit.value;
+    const poster = urlCapa_edit.value;
 });
 
 

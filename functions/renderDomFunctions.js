@@ -31,3 +31,27 @@ export function renderAtoresInAddForm(atoresInAddForm, ator_selected_content){
         ator_selected_content.appendChild(card);
     });
 }
+
+export function renderGenerosInEditForm(generosInEditForm, genero_selected_content_edit){
+    genero_selected_content_edit.innerHTML = '';
+    generosInEditForm.forEach((genero) => {
+        const card = createGeneroCard(genero, generosInEditForm, genero_selected_content_edit);
+        genero_selected_content_edit.appendChild(card);
+    });
+}
+
+export function renderRoteiristasInEditForm(roteiristasInEditForm, roteirista_selected_content_edit){
+    roteirista_selected_content_edit.innerHTML = '';
+    roteiristasInEditForm.forEach((roteirista) => {
+        const card = createRoteiristaCard(roteirista, roteiristasInEditForm, roteirista_selected_content_edit);
+        roteirista_selected_content_edit.appendChild(card);
+    });
+}
+
+export function renderAtoresInEditForm(atoresInEditForm, ator_selected_content_edit){
+    ator_selected_content_edit.innerHTML = '';
+    atoresInEditForm.forEach((ator) => {
+        const card = createAtorCard(ator, atoresInEditForm, ator_selected_content_edit);
+        ator_selected_content_edit.appendChild(card);
+    });
+}
