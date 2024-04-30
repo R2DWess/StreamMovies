@@ -252,6 +252,11 @@ body{
     cursor: pointer;
 }
 
+.favorited{
+    background-color: rgb(252, 248, 4);
+    border-radius: 50%;
+}
+
 
 
 
