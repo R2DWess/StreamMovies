@@ -1,7 +1,7 @@
 import { getFilmeByTitulo } from "./getFilmeByTitulo.js";
 import { renderAtoresInAddForm, renderAtoresInEditForm, renderGenerosInAddForm, renderGenerosInEditForm, renderMovies, renderRoteiristasInAddForm, renderRoteiristasInEditForm } from "./renderDomFunctions.js";
 
-export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal) {
+export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal, selectedFilter) {
     const categorias = categoria.map(cat => `<span>${cat}</span>`).join('');
     const card = document.createElement('div');
     card.classList.add('card_filme');
@@ -31,7 +31,7 @@ export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_con
         const filme = getFilmeByTitulo(titulo, filmes);
         if (filme) {
             filmes.splice(filmes.indexOf(filme), 1);
-            renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit,diretor_edit,urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm,  genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal);
+            renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit,diretor_edit,urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm,  genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal, selectedFilter);
         } else {
             alert('Erro ao excluir filme')
         }

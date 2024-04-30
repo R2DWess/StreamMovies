@@ -10,7 +10,7 @@ export function renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_
     );
         console.log(filteredFilmes);
         filteredFilmes.forEach((filme) => {
-            const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGeneroInEditForm, setRoteiristaInEditForm, setAtoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal);
+            const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGeneroInEditForm, setRoteiristaInEditForm, setAtoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal, selectedFilter);
             list_content.appendChild(card);
         });
 
@@ -18,7 +18,7 @@ export function renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_
     }
 
     filmes.forEach((filme) => {
-        const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGeneroInEditForm, setRoteiristaInEditForm, setAtoresInEditForm,genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal);
+        const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGeneroInEditForm, setRoteiristaInEditForm, setAtoresInEditForm,genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal, selectedFilter);
         list_content.appendChild(card);
     });
 }
