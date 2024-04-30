@@ -1,7 +1,7 @@
 import { getFilmeByTitulo } from "./getFilmeByTitulo.js";
 import { renderAtoresInAddForm, renderAtoresInEditForm, renderGenerosInAddForm, renderGenerosInEditForm, renderMovies, renderRoteiristasInAddForm, renderRoteiristasInEditForm } from "./renderDomFunctions.js";
 
-export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, generosInEditForm, roteiristasInEditForm, atoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content) {
+export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme) {
     const categorias = categoria.map(cat => `<span>${cat}</span>`).join('');
     const card = document.createElement('div');
     card.classList.add('card_filme');
@@ -31,7 +31,7 @@ export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_con
         const filme = getFilmeByTitulo(titulo, filmes);
         if (filme) {
             filmes.splice(filmes.indexOf(filme), 1);
-            renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, generosInEditForm, diretor_edit, roteiristasInEditForm, atoresInEditForm, urlCapa_edit, genero_selected_content, roteirista_selected_content, ator_selected_content);
+            renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit,diretor_edit,urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm,  genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme);
         } else {
             alert('Erro ao excluir filme')
         }
@@ -49,14 +49,16 @@ export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_con
             duracaoMinutos_edit.value = filme.duracaoEmMinutos;
             diretor_edit.value = filme.diretor;
             urlCapa_edit.value = filme.poster;
-            generosInEditForm = filme.genero;
-            roteiristasInEditForm = filme.roteiristas;
-            atoresInEditForm = filme.atores;
-            console.log(genero_selected_content);
+            const generosInEditForm = setGenerosInEditForm(filme.genero);
+            const roteiristasInEditForm = setRoteiristasInEditForm(filme.roteiristas);
+            const atoresInEditForm = setAtoresInEditForm(filme.atores);
+            console.log(generosInEditForm, roteiristasInEditForm, atoresInEditForm);
             renderGenerosInEditForm(generosInEditForm, genero_selected_content);
             renderRoteiristasInEditForm(roteiristasInEditForm, roteirista_selected_content);
             renderAtoresInEditForm(atoresInEditForm, ator_selected_content);
-            
+
+            setActualFilme(filme);
+
             modal.show();
         } else {
             

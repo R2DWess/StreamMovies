@@ -60,10 +60,34 @@ let generosInEditForm = [];
 let roteiristasInEditForm = [];
 let atoresInEditForm = [];
 
+let actualFilme;
+
+function setActualFilme(filme){
+    actualFilme = filme;
+}
+
+function setGenerosInEditForm(generos){
+    generosInEditForm = generos;
+
+    return generosInEditForm;
+}
+
+function setRoteiristasInEditForm(roteiristas){
+    roteiristasInEditForm = roteiristas;
+
+    return roteiristasInEditForm;
+}
+
+function setAtoresInEditForm(atores){
+    atoresInEditForm = atores;
+
+    return atoresInEditForm;
+}
+
 getMovies().then((data) => {
     filmes = data;
     console.log(filmes);
-    renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, generosInEditForm, roteiristasInEditForm, atoresInEditForm, genero_selected_content_edit, roteiristas_selected_content_edit, atores_selected_content_edit);
+    renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm, genero_selected_content_edit, roteiristas_selected_content_edit, atores_selected_content_edit, setActualFilme);
 })  
 
 checkAuth(login_content, authenticated, streaming_crud_content, loading_content);
@@ -170,7 +194,10 @@ addButtonFilme.addEventListener('click', (e) => {
     const roteiristas = roteiristasInAddForm;
     const atores = atoresInAddForm;
 
+
     const filme = new Filme(titulo, ano, duracaoMinutos, generos, diretor, roteiristas, atores, urlCapa, undefined);
+
+    
 
     filmes.push(filme);
     generosInAddForm = [];
@@ -179,17 +206,34 @@ addButtonFilme.addEventListener('click', (e) => {
     renderAtoresInAddForm(atoresInAddForm, atores_selected_content);
     renderGenerosInAddForm(generosInAddForm, genero_selected_content);
     renderRoteiristasInAddForm(roteiristasInAddForm, roteiristas_selected_content);
-    renderMovies(list_content, filmes);
+    renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm, genero_selected_content_edit, roteiristas_selected_content_edit, atores_selected_content_edit, setActualFilme);
 });
 
 editButtonFilme.addEventListener('click', (e) => {
     e.preventDefault();
+
+    console.log('1', 'teste');
 
     const titulo = titulo_edit.value;
     const ano = ano_edit.value;
     const duracaoEmMinutos = duracaoMinutos_edit.value;
     const diretor = diretor_edit.value;
     const poster = urlCapa_edit.value;
+
+    console.log(actualFilme);
+
+    const index = filmes.findIndex((filme) => filme.titulo == actualFilme.titulo);
+
+    console.log(index);
+
+    console.log(generosInEditForm);
+    console.log(roteiristasInEditForm);
+    console.log(atoresInEditForm);
+
+
+    filmes[index] = new Filme(titulo, ano, duracaoEmMinutos, generosInEditForm, diretor, roteiristasInEditForm, atoresInEditForm, poster, undefined);
+
+    renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm,genero_selected_content_edit, roteiristas_selected_content_edit, atores_selected_content_edit, setActualFilme);
 });
 
 
