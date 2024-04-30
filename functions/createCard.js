@@ -3,6 +3,7 @@ import { renderAtoresInAddForm, renderAtoresInEditForm, renderGenerosInAddForm, 
 
 export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal, selectedFilter) {
     const categorias = categoria.map(cat => `<span>${cat}</span>`).join('');
+    const categoriasWithOutFavoriteAndBookmark = categoria.filter((cat) => cat != 'Favoritos' && cat != 'Minha Lista');
     const card = document.createElement('div');
     card.classList.add('card_filme');
     card.innerHTML = `
@@ -10,7 +11,7 @@ export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_con
           <div class="card_info">
                 <div class="card_text">
                     <span>${titulo} - ${ano}</span>
-                    ${categorias}
+                    ${categoriasWithOutFavoriteAndBookmark}
                 </div>
                 <div class="button-card">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -71,6 +72,8 @@ export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_con
         }
     });
 
+    
+
     const playButton = card.querySelector('.bi-play');
     playButton.addEventListener('click', function() {
         const modalvideo = new bootstrap.Modal(videoModal);
@@ -84,9 +87,28 @@ export function createFilmeCard(titulo, ano, categoria, poster, filmes, list_con
         const index = filmes.findIndex((filme) => filme.titulo == titulo);
 
         if(filmes[index].genero.includes('Favoritos')){
-            
+            filmes[index].genero = filmes[index].genero.filter((genero) => genero != 'Favoritos');
+            e.target.classList.remove('favorited')
+            return;
         }
 
+        filmes[index].genero.push('Favoritos');
+        e.target.classList.add('favorited')
+    })
+
+    const bookMarkButton = card.querySelector('.bi-bookmark-star-fill');
+    favoriteButton.addEventListener('click', (e) => {
+        const index = filmes.findIndex((filme) => filme.titulo == titulo);
+
+
+        if(filmes[index].genero.includes('Minha Lista')){
+            filmes[index].genero = filmes[index].genero.filter((genero) => genero != 'Minha Lista');
+            e.target.classList.remove('bookmarked');
+            return;
+        }
+
+        filmes[index].genero.push('Minha Lista');
+        e.target.classList.add('bookmarked');
     })
 
     return card;
