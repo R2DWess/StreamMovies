@@ -1,7 +1,22 @@
 import { createAtorCard, createFilmeCard, createGeneroCard, createRoteiristaCard } from "./createCard.js";
 
-export function renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGeneroInEditForm, setRoteiristaInEditForm, setAtoresInEditForm,genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal){
+export function renderMovies(list_content, filmes, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGeneroInEditForm, setRoteiristaInEditForm, setAtoresInEditForm,genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal, selectedFilter){
     list_content.innerHTML = '';
+    console.log(selectedFilter);
+    console.log(filmes);
+    if(selectedFilter.length > 0){
+        const filteredFilmes = filmes.filter((filme) => 
+            filme.genero.some((genero) => selectedFilter.includes(genero))
+    );
+        console.log(filteredFilmes);
+        filteredFilmes.forEach((filme) => {
+            const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGeneroInEditForm, setRoteiristaInEditForm, setAtoresInEditForm, genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal);
+            list_content.appendChild(card);
+        });
+
+        return;
+    }
+
     filmes.forEach((filme) => {
         const card = createFilmeCard(filme.titulo, filme.ano, filme.genero, filme.poster, filmes, list_content, modal_edit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGeneroInEditForm, setRoteiristaInEditForm, setAtoresInEditForm,genero_selected_content, roteirista_selected_content, ator_selected_content, setActualFilme, videoModal);
         list_content.appendChild(card);
