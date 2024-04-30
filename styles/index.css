@@ -226,7 +226,7 @@ body{
     outline: none;
 }
 
-.genero_selected_content, .roteiristas_selected_content, .atores_selected_content{
+.genero_selected_content, .roteiristas_selected_content, .atores_selected_content, .genero_selected_content_edit, .roteiristas_selected_content_edit, .atores_selected_content_edit{
     margin-top: 10px;
     height: auto;
     display: flex;

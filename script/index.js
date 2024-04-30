@@ -32,6 +32,8 @@ const edit_genero_form_button = document.querySelector('#edit_genero_form');
 const edit_roteirista_form = document.querySelector('#edit_roteirista_form');
 const edit_atores_form = document.querySelector('#edit_atores_form');
 
+const search_input = document.querySelector('#search');
+
 
 
 
@@ -88,7 +90,13 @@ getMovies().then((data) => {
     filmes = data;
     console.log(filmes);
     renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm, genero_selected_content_edit, roteiristas_selected_content_edit, atores_selected_content_edit, setActualFilme);
-})  
+})
+
+search_input.addEventListener('input', (e) => {
+    const filteredMovies = filmes.filter((filme) => filme.titulo.toLowerCase().includes(e.target.value.toLowerCase()));
+
+    renderMovies(list_content, filteredMovies, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm, genero_selected_content_edit, roteiristas_selected_content_edit, atores_selected_content_edit, setActualFilme);
+})
 
 checkAuth(login_content, authenticated, streaming_crud_content, loading_content);
 
@@ -212,6 +220,8 @@ addButtonFilme.addEventListener('click', (e) => {
 editButtonFilme.addEventListener('click', (e) => {
     e.preventDefault();
 
+    const modal = bootstrap.Modal.getInstance(modalEdit);
+
     console.log('1', 'teste');
 
     const titulo = titulo_edit.value;
@@ -232,6 +242,7 @@ editButtonFilme.addEventListener('click', (e) => {
 
 
     filmes[index] = new Filme(titulo, ano, duracaoEmMinutos, generosInEditForm, diretor, roteiristasInEditForm, atoresInEditForm, poster, undefined);
+    modal.hide();
 
     renderMovies(list_content, filmes, modalEdit, titulo_edit, ano_edit, duracaoMinutos_edit, diretor_edit, urlCapa_edit, setGenerosInEditForm, setRoteiristasInEditForm, setAtoresInEditForm,genero_selected_content_edit, roteiristas_selected_content_edit, atores_selected_content_edit, setActualFilme);
 });
